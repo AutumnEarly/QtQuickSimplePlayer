@@ -18,9 +18,6 @@ FramelessWindow {
     minimumWidth: 1010 
     minimumHeight: 710
     title: "正在播放: " + p_music_Player.thisPlayMusicInfo.name + "~"
-    Component.onCompleted: {
-        console.log("AA" + FavoriteManager)
-    }
 
     MusicResource { // 音乐资源访问管理
         id: p_musicRes
