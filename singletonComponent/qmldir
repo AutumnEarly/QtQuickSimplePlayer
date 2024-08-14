@@ -1,0 +1,3 @@
+singleton FavoriteManager FavoriteManager.qml
+singleton MyPlayListManager MyPlayListManager.qml
+singleton HistoryRecordManager HistoryRecordManager.qml
