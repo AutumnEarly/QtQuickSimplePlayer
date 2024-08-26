@@ -31,7 +31,6 @@ FramelessWindow {
         downloadSavePath: "Download"
     }
 
-
     Rectangle { // 页面管理
         id: windowPage
         property string operatingInfoPath: "system/operatingInfo.json"
@@ -173,6 +172,7 @@ FramelessWindow {
         function saveOperatingInfo() { // 保存操作信息
             let operatingInfo = {
                 "thisPlayListInfo": null, "thisPlayMusicInfo": null, "themeConfig": null,
+                "leftBarInfo": null
             }
             let getThisPlayListInfo = ()=> { // 获取当前播放列表信息
                 let thisPlayListInfo = p_music_Player.thisPlayListInfo
@@ -199,10 +199,18 @@ FramelessWindow {
                 let config = ThemeManager.config
                 return config
             }
+            let getLeftBarInfo = () => {
+                let info = {
+                    "thisBtnText": leftBar.thisBtnText,
+                    "thisQml": leftBar.thisQml,
+                }
+                return info
+            }
 
             operatingInfo.thisPlayListInfo = getThisPlayListInfo()
             operatingInfo.thisPlayMusicInfo = getThisPlayMusicInfo()
             operatingInfo.themeConfig = getThemeConfig()
+            operatingInfo.leftBarInfo = getLeftBarInfo()
 //            console.log( "operatingInfo: "+ JSON.stringify(operatingInfo))
             QCTool.writeFile(windowPage.operatingInfoPath,JSON.stringify(operatingInfo))
         }
@@ -213,16 +221,20 @@ FramelessWindow {
                 windowPage.operatingInfo = operatingInfo
                 p_music_Player.thisPlayListInfo = operatingInfo.thisPlayListInfo
                 p_music_Player.thisPlayingCurrent = operatingInfo.thisPlayMusicInfo.playInfo.playingCurrent
-                p_music_Player.thisPlayMusicInfo = operatingInfo.thisPlayMusicInfo.musicInfo
+                p_music_Player.thisPlayMusicInfo = p_music_Player.thisPlayListInfo[p_music_Player.thisPlayingCurrent]
                 p_music_Player.position = operatingInfo.thisPlayMusicInfo.playInfo.position
                 p_music_Player.volume = operatingInfo.thisPlayMusicInfo.playInfo.volume
                 p_music_Player.playMode = operatingInfo.thisPlayMusicInfo.playInfo.playMode
 
                 ThemeManager.config = operatingInfo.themeConfig
                 ThemeManager.switchTheme(ThemeManager.config.name , ThemeManager.config.type)
+
+                leftBar.thisBtnText = operatingInfo.leftBarInfo.thisBtnText
+                leftBar.thisQml = operatingInfo.leftBarInfo.thisQml
+
                 console.log(JSON.stringify(p_music_Player.thisPlayListInfo[p_music_Player.thisPlayingCurrent]))
             } catch(err) {
-                console.log("operatingInfo: 保存操作错误 " + err)
+                console.log("operatingInfo: 恢复操作错误 " + err)
                 return
             }
         }

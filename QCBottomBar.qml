@@ -113,7 +113,7 @@ Rectangle {
                 width: parent.height
                 height: width
                 source: p_music_Player.thisPlayMusicInfo.coverImg +"?thumbnail=" + width + "y" + height
-                visible: p_music_Player.thisPlayMusicInfo.url
+                visible: p_music_Player.thisPlayMusicInfo.coverImg
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
@@ -262,7 +262,7 @@ Rectangle {
                             anchors.verticalCenter: parent.verticalCenter
                             Repeater {
                                 id: repeater
-                                model: p_music_Player.thisPlayMusicInfo.artists.length
+                                model: p_music_Player.thisPlayMusicInfo.artists
                                 delegate: Text {
                                     id: artistsText
                                     property int currentIndex: index
