@@ -221,7 +221,7 @@ FramelessWindow {
                 windowPage.operatingInfo = operatingInfo
                 p_music_Player.thisPlayListInfo = operatingInfo.thisPlayListInfo
                 p_music_Player.thisPlayingCurrent = operatingInfo.thisPlayMusicInfo.playInfo.playingCurrent
-                p_music_Player.thisPlayMusicInfo = p_music_Player.thisPlayListInfo[p_music_Player.thisPlayingCurrent]
+                p_music_Player.thisPlayMusicInfo = operatingInfo.thisPlayMusicInfo.musicInfo
                 p_music_Player.position = operatingInfo.thisPlayMusicInfo.playInfo.position
                 p_music_Player.volume = operatingInfo.thisPlayMusicInfo.playInfo.volume
                 p_music_Player.playMode = operatingInfo.thisPlayMusicInfo.playInfo.playMode
