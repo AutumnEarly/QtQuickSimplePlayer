@@ -68,7 +68,7 @@ Rectangle {
                     font.pointSize: fontSize
                     font.weight: 2
                     elide: Text.ElideRight
-                    text: index+1
+                    text: index+1+ musicSearchPage.thisPage * musicSearchPage.limit
                     color: "#"+ thisTheme.fontColor
                 }
                 QCToolTipButton {
