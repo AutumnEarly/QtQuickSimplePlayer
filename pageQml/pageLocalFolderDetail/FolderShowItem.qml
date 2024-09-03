@@ -73,12 +73,16 @@ Item {
                             height: contentHeight
                             font.pointSize: 10
                             anchors.verticalCenter: parent.verticalCenter
-                            text: localFolderPage.foldersData[index].url.slice(8)
+                            text: parseUrl(localFolderPage.foldersData[index].url.slice(0))
                             color: "#" + thisTheme.fontColor
                             onContentWidthChanged: function (contentWidth) {
                                 if(contentWidth > selectFolder.width && selectFolder.contentWidth < contentWidth) {
                                     selectFolder.contentWidth = contentWidth
                                 }
+                            }
+                            function parseUrl(url) {
+                                url = url.slice(url.lastIndexOf("/")+1)
+                                return url
                             }
                         }
                     }
